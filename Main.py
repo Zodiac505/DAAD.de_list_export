@@ -71,22 +71,29 @@ def get_query(jurl):
     return js
 
 def get_filters():
-    dic_degree = {"1":"Bachelor's degree", "2":"Master's degree", "3":"PhD / Doctorate", "4":"Cross-faculty graduate and research school", "7":"Prep course", "7-1":"Applicants don't need a higher education entrance qualification recognised in Germany", "7-2":"Admission for a study programme at the university required", "7-3":"Language exams offered", "5":"Language course", "5-1":"Language exams offered", "6":"Short course", "6-1":"Language exams offered", "10":"Joint degree / double degree programme"}
+    dic_degree = {"1":"Bachelor's degree", "2":"Master's degree", "3":"PhD / Doctorate", "4":"Cross-faculty graduate and research school", "5":"Language course", "5-1":"Language exams offered", "6":"Short course", "6-1":"Language exams offered", "7":"Prep course", "7-1":"Applicants don't need a higher education entrance qualification recognised in Germany", "7-2":"Admission for a study programme at the university required", "7-3":"Language exams offered", "10":"Joint degree / double degree programme"}
     dic_fos = {"1":"Agriculture, Forestry and Nutritional Science", "2":"Art, Art Theory", "3":"Engineering", "4":"Languages and Cultural Studies", "5":"Law, Economics and Social Sciences", "6":"Mathematics, Natural Sciences", "7":"Medicine", "8":"Sport", "9":"Veterinary Medicine"}
     dic_lang = {"1":"German only", "1-1":"Course-related German Language Courses available", "2":"English only", "2-1":"Course-related English Language Courses available", "4":"German & English", "3":"Other"}
-    dic_modStd = {"7":"Fully on-site","1":"Fully online","2":"Hybrid","4":"50 / 50 online and on-site","5":"Less than 50 online","6":"More than 50 online"}
-
-    degree_i = [i for i in js['filter']['degree']]
-    degree_i.pop(-2)
-    degree_i.insert(7,{'value':'7-3','count':js['filter']['langExamPC']})
-    degree_i.insert(7,{'value':'7-2','count':js['filter']['admReq']})
-    degree_i.insert(7,{'value':'7-1','count':js['filter']['cert']})
-    degree_i.insert(6,{'value':'6-1','count':js['filter']['langExamSC']})
+    dic_modStd = {"1":"Fully online", "2":"Hybrid", "4":"50 / 50 online and on-site", "5":"Less than 50 online", "6":"More than 50 online", "7":"Fully on-site"}
+    
+    # degree_i = [i for i in js['filter']['degree']]
+    # degree_i.pop(-2)
+    # degree_i.insert(7,{'value':'7-3','count':js['filter']['langExamPC']})
+    # degree_i.insert(7,{'value':'7-2','count':js['filter']['admReq']})
+    # degree_i.insert(7,{'value':'7-1','count':js['filter']['cert']})
+    # degree_i.insert(6,{'value':'6-1','count':js['filter']['langExamSC']})
+    # print('\n\n','*'*40,sep='')
+    # for i in degree_i:
+    #     if len(i['value']) > 2:
+    #         print('  ',end='') 
+    #     print('('+i['value']+') '+dic_degree.get(i['value'])+' [count:'+str(i['count'])+']')
     print('\n\n','*'*40,sep='')
-    for i in degree_i:
-        if len(i['value']) > 2:
-            print('  ',end='') 
-        print('('+i['value']+') '+dic_degree.get(i['value'])+' [count:'+str(i['count'])+']')
+    count = {i['value']:i['count'] for i in js['filter']['degree']}
+    for k in dic_degree.keys():
+        if count.get(k) is not None:
+            if len(k) > 2:
+                print('  ',end='')
+            print('('+k+') '+dic_degree.get(k)+' [count:'+str(count.get(k,0))+']')
     print('''
     Select one or multiple of above options by inserting related number to filter <<DEGREE>>.
     Seperate multiple choices by space or comma. Press 'Enter' to select all.''')
@@ -101,10 +108,15 @@ def get_filters():
         else:
             print(' '*4+'Invalid input\n')
 
-    fos_i = [i for i in js['filter']['fos']]
+    # fos_i = [i for i in js['filter']['fos']]
+    # print('\n\n','*'*40,sep='')
+    # for i in fos_i:
+    #     print('('+i['value']+') '+dic_fos.get(i['value'])+' [count:'+str(i['count'])+']')
     print('\n\n','*'*40,sep='')
-    for i in fos_i:
-        print('('+i['value']+') '+dic_fos.get(i['value'])+' [count:'+str(i['count'])+']')
+    count = {i['value']:i['count'] for i in js['filter']['fos']}
+    for k in dic_fos.keys():
+        if count.get(k) is not None:
+            print('('+k+') '+dic_fos.get(k)+' [count:'+str(count.get(k,0))+']')
     print('''
     Select ONE of above options by inserting related number to filter <<FIELD OF STUDY>>.
     Press 'Enter' to select all.''')
@@ -221,7 +233,7 @@ if js['numResults'] > 0:
     search_for = search_for.replace('%20','_')
     # exp_str = f'./{search_for}_Export_{t[0]}{t[1]}{t[2]}_{t[3]}{t[4]}.csv'
     # Course_db.to_csv(exp_str, index = False, encoding = 'utf-8-sig')
-    exp_str = f'./Exported_{search_for}_{t[0]}{t[1]}{t[2]}_{t[3]}{t[4]}.xlsx'
+    exp_str = f'./Exported_{search_for}_{t[0]}{format(t[1],">02")}{format(t[2],">02")}_{format(t[3],">02")}{format(t[4],">02")}.xlsx'
     Course_db.to_excel(exp_str, index = False, encoding = 'utf-8-sig')
 
     print('\n\n   Course list exported to: \n\t\t',exp_str[2:])
