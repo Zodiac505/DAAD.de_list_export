@@ -233,7 +233,7 @@ if js['numResults'] > 0:
     search_for = search_for.replace('%20','_')
     # exp_str = f'./{search_for}_Export_{t[0]}{t[1]}{t[2]}_{t[3]}{t[4]}.csv'
     # Course_db.to_csv(exp_str, index = False, encoding = 'utf-8-sig')
-    exp_str = f'./Exported_{search_for}_{t[0]}{format(t[1],">02")}{format(t[2],">02")}_{format(t[3],">02")}{format(t[4],">02")}.xlsx'
-    Course_db.to_excel(exp_str, index = False, encoding = 'utf-8-sig')
+    exp_str = f'./Exports/Exported_{search_for}_{t[0]}{format(t[1],">02")}{format(t[2],">02")}_{format(t[3],">02")}{format(t[4],">02")}.xlsx'
+    Course_db.to_excel(exp_str, index = False)#, encoding = 'utf-8-sig')
 
     print('\n\n   Course list exported to: \n\t\t',exp_str[2:])
