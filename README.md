@@ -1,5 +1,6 @@
 # DAAD.de list export
-Bubble sheet multiple choice scanner and test grader using OMR, Python and OpenCV
+This piece of code can be used to export German univesity programs from DAAD.de website.
+It gets a search term from user and shows possible filters based on it and exports university programs to an excel file.
 
 How to install locally (assuming you have git and python >= 3.9 installed):
 
