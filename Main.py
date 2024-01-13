@@ -74,7 +74,7 @@ def get_filters():
     dic_degree = {"1":"Bachelor's degree", "2":"Master's degree", "3":"PhD / Doctorate", "4":"Cross-faculty graduate and research school", "5":"Language course", "5-1":"Language exams offered", "6":"Short course", "6-1":"Language exams offered", "7":"Prep course", "7-1":"Applicants don't need a higher education entrance qualification recognised in Germany", "7-2":"Admission for a study programme at the university required", "7-3":"Language exams offered", "10":"Joint degree / double degree programme"}
     dic_fos = {"1":"Agriculture, Forestry and Nutritional Science", "2":"Art, Art Theory", "3":"Engineering", "4":"Languages and Cultural Studies", "5":"Law, Economics and Social Sciences", "6":"Mathematics, Natural Sciences", "7":"Medicine", "8":"Sport", "9":"Veterinary Medicine"}
     dic_lang = {"1":"German only", "1-1":"Course-related German Language Courses available", "2":"English only", "2-1":"Course-related English Language Courses available", "4":"German & English", "3":"Other"}
-    dic_modStd = {"1":"Fully online", "2":"Hybrid", "4":"50 / 50 online and on-site", "5":"Less than 50 online", "6":"More than 50 online", "7":"Fully on-site"}
+    dic_modStd = {"1":"Fully online", "2":"Hybrid", "4":"50 / 50 online and on-site", "5":"Less than 50 online", "6":"More than 50 online", "7":"Fully on-site", "8":"Other"}
     
     # degree_i = [i for i in js['filter']['degree']]
     # degree_i.pop(-2)
